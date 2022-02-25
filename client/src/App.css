@@ -37,3 +37,18 @@
     transform: translateY(0px);
   }
 }
+
+body{
+  font-family: "Public Sans",sans-serif;
+  color: #495057;
+  font-size: .9375rem;
+}
+
+/* custom style */
+.custom-form .ant-input{
+  background-color: rgba(230, 235, 245, 0.25) !important
+}
+.custom-form .ant-form-item-explain-error{
+  margin:3px 0 15px;
+  font-size: 13px;
+}

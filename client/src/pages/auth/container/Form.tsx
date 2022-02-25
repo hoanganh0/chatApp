@@ -1,8 +1,14 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import styled from 'styled-components';
+import styled from "styled-components";
+import { COLOR } from "../../../config/commom/color";
 
-export default function FormAuth() {
+interface IProps {
+  statusForm: boolean;
+}
+
+export const FormAuth: React.FC<IProps> = (props) => {
+  const { statusForm } = props;
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -15,51 +21,77 @@ export default function FormAuth() {
     <Wrap>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 8 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        className="custom-form"
       >
+        <P>Tên đăng nhập</P>
         <Form.Item
-          label="Username"
           name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: "Vui lòng không để trống!" }]}
+          style={{ marginTop: 5 }}
         >
-          <Input />
+          <Input style={InputItem} />
         </Form.Item>
-
+        <P>Mật khẩu</P>
         <Form.Item
-          label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: "Vui lòng không để trống!" }]}
+          style={{ marginTop: 5 }}
         >
-          <Input.Password />
+          <Input.Password style={InputItem} />
         </Form.Item>
+        {statusForm && (
+          <div>
+            <P>Nhập lại mật khẩu</P>
+            <Form.Item
+              name="repassword"
+              rules={[{ required: true, message: "Vui lòng không để trống!" }]}
+              style={{ marginTop: 5 }}
+            >
+              <Input.Password style={InputItem} />
+            </Form.Item>
+          </div>
+        )}
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
+        <Form.Item>
+          <Button type="primary" htmlType="submit" style={Submit}>
+            {statusForm ? "Đăng nhập" : "Đăng ký"}
           </Button>
         </Form.Item>
       </Form>
     </Wrap>
   );
-}
+};
 
 const Wrap = styled.div`
   margin: auto;
 
   // @media(min-width: 768px){
-  //   max-width: 600px
+  //   min-width: 600px
   // }
-`
+
+  background-color: ${COLOR.HEXffffff};
+  background-clip: border-box;
+  border: 0 solid ${COLOR.HEXf5f7fb};
+  border-radius: 0.25rem;
+  padding: 2.5rem;
+  max-width: 456px;
+`;
+const P = styled.label`
+  color: #495057;
+  font-size: 0.9375rem;
+`;
+const Submit = {
+  width: "100%",
+  backgroundColor: COLOR.HEX7269ef,
+  borderColor: COLOR.HEX7269ef,
+  borderRadius: 3,
+};
+const InputItem = {
+  backgroundColor: "rgba(230,235,245,.25)",
+  borderColor: COLOR.HEXe6ebf5,
+  padding: "8px 16px",
+};
