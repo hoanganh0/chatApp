@@ -52,3 +52,7 @@ body{
   margin:3px 0 15px;
   font-size: 13px;
 }
+
+body p, h1, h2, h3, h4, h5{
+  margin-bottom: 0;
+}
